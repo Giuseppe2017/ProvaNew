@@ -28,21 +28,119 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link href="js/libs/jquery-mobile/jquery.mobile.structure.min.css" rel="stylesheet" type="text/css"/>
+        <link href="js/libs/jquery-mobile/jquery.mobile.icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="js/libs/jquery-mobile/jquery.mobile.theme.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/libs/jquery/jquery.min.js" type="text/javascript"></script>
+        <script src="js/libs/jquery-mobile/jquery.mobile.min.js" type="text/javascript"></script>
+        <script src="cordova.js"></script>
+        <script src="js/index.js"></script>
+        
+        
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+        <div data-role="page" id="home">
+            <div data-role="panel" id="pannello">
+                <h3>Menù</h3>
+                <ul data-role="listview">
+                    <li><a href="#iscrizione">Iscrizione</a></li>
+                    <li><a href="#elenco">Elenco</a></li>
+                   
+                </ul>
+            </div>
+            <div data-role="header" data-position="fixed">
+                <a href="#pannello" class="ui-btn ui-btn-left ui-icon-bars ui-btn-icon-left ui-btn-icon-notext">Menù</a>
+                <h1>Portfolio</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+
+            </div>
+            <div data-role="footer" data-position="fixed" style="text-align: center;">
+                <div data-role="controlgroup" data-type="horizontal">
+                    <a href="" class="ui-btn ui-btn-icon-left ui-icon-comment">Facebook</a>
+                    <a href="" class="ui-btn ui-btn-icon-left ui-icon-tag">Twitter</a>
+                    <a href="" class="ui-btn ui-btn-icon-left ui-icon-video">YouTube</a>
+                </div>
             </div>
         </div>
+        
+        <!-- Pagina iscrizione -->
+        <div data-role="page" id="iscrizione">
+            <div data-role="panel" id="pannello2">
+                <h3>iscrizione</h3>
+                <ul data-role="listview">
+                 <li><a href="#iscrizione">Iscrizione</a></li>
+                    <li><a href="#elenco">Elenco</a></li>   
+                </ul>
+            </div>
+            <div data-role="header" data-position="fixed">
+                <a href="#pannello2" class="ui-btn ui-btn-left ui-icon-bars ui-btn-icon-left ui-btn-icon-notext">Menù</a>
+                <h1>iscrizione</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                
+                <h2>Inserisci nuovo giocatore</h2>
+                
+                <div class="ui-field-contain">
+                    <form id="inserisciGiocatore">
+                    <input type="text" name="nome" id="nome" placeholder="nome">
+                    <input type="text" name="telefono" id="telefono" placeholder="telefono">
+                    <select name="ruolo" id="ruolo">
+                        <option value="p">Portiere</option>
+                         <option value="D">Difensore</option>
+                          <option value="C">Centrocampista</option>
+                          <option value="C">Attaccante</option>
+                    </select>
+                    <input type="submit" value="Salva" class="ui-btn">
+                    </form>
+                </div>
+                    
+            </div>
+            <div data-role="footer" data-position="fixed" style="text-align: center;">
+                <div data-role="controlgroup" data-type="horizontal">
+                    <a href="" class="ui-btn ui-btn-icon-left ui-icon-comment">Facebook</a>
+                    <a href="" class="ui-btn ui-btn-icon-left ui-icon-tag">Twitter</a>
+                    <a href="" class="ui-btn ui-btn-icon-left ui-icon-video">YouTube</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- Pagina elenco -->
+        <div data-role="page" id="elenco">
+            <div data-role="panel" id="pannello3">
+                <h3>iscrizione</h3>
+                <ul data-role="listview">
+                 <li><a href="#iscrizione">Iscrizione</a></li>
+                    <li><a href="#elenco">Elenco</a></li>   
+                </ul>
+            </div>
+            <div data-role="header" data-position="fixed">
+                <a href="#pannello3" class="ui-btn ui-btn-left ui-icon-bars ui-btn-icon-left ui-btn-icon-notext">Menù</a>
+                <h1>elenco</h1>
+                <ul id="listaGiocatori" data-role='listview'></ul>
+            </div>
+            <div data-role="main" class="ui-content">
+                
+                
+
+            </div>
+            <div data-role="footer" data-position="fixed" style="text-align: center;">
+                <div data-role="controlgroup" data-type="horizontal">
+                    <a href="" class="ui-btn ui-btn-icon-left ui-icon-comment">Facebook</a>
+                    <a href="" class="ui-btn ui-btn-icon-left ui-icon-tag">Twitter</a>
+                    <a href="" class="ui-btn ui-btn-icon-left ui-icon-video">YouTube</a>
+                </div>
+            </div>
+        </div>
+        
+        
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>

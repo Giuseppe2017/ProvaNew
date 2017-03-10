@@ -16,31 +16,43 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var app = {
-    // Application Constructor
-    initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-    },
-
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
-    onDeviceReady: function() {
-        this.receivedEvent('deviceready');
-    },
-
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-    }
-};
-
-app.initialize();
+$(function(){
+   $("#inserisciGiocatore").submit(function(event){
+       event.preventDefault();
+       var myObj = new Object();
+       myObj.nome = $("#nome").val();
+       myObj.telefono = $("#telefono").val();
+       myObj.ruolo = $("#ruolo").val();
+       var json = JSON.stringify(myObj);
+   
+       $.ajax({
+          url:"https://calcetto-2d790.firebaseio.com/giocatori.json",
+          type:"POST",
+          data: json
+       })
+               .done(function(){
+                   alert("Tutto ok");
+       })
+               .fail(function(){
+                   alert("Errore!");
+       }); 
+   });
+   $("#elenco").on("pageshow",function(){
+      $.ajax("https://calcetto-2d790.firebaseio.com/giocatori.json")
+              .done(function(data){
+                  var lista = $("#listaGiocatori");
+                  lista.empty();
+                  $.map(data,function(riga,indice){
+                      var testoGiocatore = "";
+                          testoGiocatore += riga.nome + " ";
+                          testoGiocatore += riga.telefono + " ";
+                          testoGiocatore += riga.ruolo + " ";
+                          //console.log(testoGiocatore);
+                      $(lista).append('<li>'+ testoGiocatore +'</li>');
+                  });
+              })
+              .fail(function(){
+                  alert("Errore!");
+              });
+   });
+});
